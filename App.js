@@ -71,6 +71,12 @@ import EventSubmission from "./pages/public/submissions/EventSubmission";
 import MediaSubmission from "./pages/public/submissions/MediaSubmission";
 import PlayerSubmission from "./pages/public/submissions/PlayerSubmission";
 
+
+// ADMIN
+import AdminDashboard from "./AdminDashboard";
+import Login from "./Login";
+import ProtectedRoute from "./ProtectedRoute";
+
 function App() {
   return (
     <Router>
@@ -147,6 +153,18 @@ function App() {
         <Route path="/public/submissions/event" element={<EventSubmission />} />
         <Route path="/public/submissions/media" element={<MediaSubmission />} />
         <Route path="/public/submissions/player" element={<PlayerSubmission />} />
+
+
+        {/* ADMIN */}
+        <Route path="/login" element={<Login />} />
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute>
+              <AdminDashboard />
+            </ProtectedRoute>
+          }
+        />
 
       </Routes>
     </Router>

@@ -1,17 +1,31 @@
-import React from 'react';
-import AdminDashboard from './AdminDashboard';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import AdminDashboard from "../AdminDashboard";
+import Login from "../Login";
+import ProtectedRoute from "../ProtectedRoute";
 
 function App() {
-    return (
-        <Router>
-            <Switch>
-                <Route path='/' exact component={Home} />
-                <Route path='/admin' component={AdminDashboard} />
-                {/* other routes */}
-            </Switch>
-        </Router>
-    );
+  return (
+    <Router>
+      <Routes>
+        {/* Admin login */}
+        <Route path="/login" element={<Login />} />
+
+        {/* Protected admin dashboard */}
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute>
+              <AdminDashboard />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Default */}
+        <Route path="/" element={<Login />} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;
