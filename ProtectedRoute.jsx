@@ -2,7 +2,7 @@ import React from "react";
 import { Navigate } from "react-router-dom";
 
 function ProtectedRoute({ children }) {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("adminToken");
 
   // If no token, send user to login
   if (!token) {
