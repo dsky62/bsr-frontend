@@ -74,6 +74,9 @@ import PlayerSubmission from "./pages/public/submissions/PlayerSubmission";
 // ADMIN DASHBOARD
 import AdminDashboard from "./pages/admin/AdminDashboard";
 
+// ADMIN RANKINGS MANAGER
+import RankingsManager from "./pages/admin/RankingsManager";
+
 function App() {
   return (
     <Router>
@@ -153,6 +156,9 @@ function App() {
 
         {/* ADMIN DASHBOARD */}
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
+
+        {/* ADMIN RANKINGS */}
+        <Route path="/admin/rankings" element={<RankingsManager />} />
 
       </Routes>
     </Router>
