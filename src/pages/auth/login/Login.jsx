@@ -27,26 +27,19 @@ const Login = () => {
 
   return (
     <div style={{ background: 'linear-gradient(135deg, #0a0e27 0%, #1a1a2e 50%, #16213e 100%)', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
-      
       <div style={{ maxWidth: '400px', width: '100%' }}>
-        
-        {/* HEADER */}
         <div style={{ textAlign: 'center', marginBottom: '40px' }}>
           <h1 style={{ fontSize: '36px', fontWeight: '900', color: '#00B4FF', marginBottom: '10px' }}>🏀 BSR Login</h1>
           <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '14px' }}>Sign in to your account</p>
         </div>
 
-        {/* FORM */}
         <form onSubmit={handleSubmit} style={{ background: 'rgba(0,180,255,0.1)', border: '2px solid rgba(0,180,255,0.3)', borderRadius: '12px', padding: '30px' }}>
-          
-          {/* ERROR MESSAGE */}
           {error && (
             <div style={{ background: 'rgba(255,0,0,0.2)', border: '1px solid #FF0000', color: '#FF6B6B', padding: '12px', borderRadius: '8px', marginBottom: '20px', fontSize: '13px' }}>
               ❌ {error}
             </div>
           )}
 
-          {/* EMAIL */}
           <div style={{ marginBottom: '20px' }}>
             <label style={{ display: 'block', color: '#00B4FF', fontWeight: '700', marginBottom: '8px', fontSize: '14px' }}>Email Address</label>
             <input
@@ -71,7 +64,6 @@ const Login = () => {
             />
           </div>
 
-          {/* PASSWORD */}
           <div style={{ marginBottom: '20px' }}>
             <label style={{ display: 'block', color: '#00B4FF', fontWeight: '700', marginBottom: '8px', fontSize: '14px' }}>Password</label>
             <input
@@ -96,12 +88,10 @@ const Login = () => {
             />
           </div>
 
-          {/* FORGOT PASSWORD */}
           <div style={{ textAlign: 'right', marginBottom: '20px' }}>
             <Link to="/auth/reset-password" style={{ color: '#00B4FF', textDecoration: 'none', fontSize: '13px', fontWeight: '700' }}>Forgot Password?</Link>
           </div>
 
-          {/* SUBMIT BUTTON */}
           <button
             type="submit"
             disabled={loading}
@@ -124,13 +114,11 @@ const Login = () => {
             {loading ? 'Logging in...' : 'Login'}
           </button>
 
-          {/* SIGN UP LINK */}
           <div style={{ textAlign: 'center', color: 'rgba(255,255,255,0.7)', fontSize: '13px' }}>
             Don't have an account? <Link to="/auth/signup" style={{ color: '#00B4FF', textDecoration: 'none', fontWeight: '700' }}>Sign Up</Link>
           </div>
         </form>
 
-        {/* DEMO CREDENTIALS */}
         <div style={{ marginTop: '30px', background: 'rgba(0,180,255,0.1)', border: '1px solid rgba(0,180,255,0.3)', borderRadius: '8px', padding: '15px', fontSize: '12px', color: 'rgba(255,255,255,0.7)' }}>
           <div style={{ fontWeight: '700', color: '#00B4FF', marginBottom: '8px' }}>Demo Credentials:</div>
           <div>Email: <span style={{ color: '#fff' }}>coach@bsr.com</span></div>

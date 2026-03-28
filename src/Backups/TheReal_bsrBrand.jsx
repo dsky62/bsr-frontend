@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const PublicHome = () => {
   const hoverCardIn = (e) => {
     e.currentTarget.style.transform = "translateY(-6px)";
-    e.currentTarget.style.boxShadow = "0 0 22px rgba(0, 180, 255, 0.9)";
+    e.currentTarget.style.boxShadiow = "0 0 22px rgba(0, 180, 255, 0.9)";
     e.currentTarget.style.borderColor = "#00B4FF";
   };
 

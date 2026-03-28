@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+import PublicNav from "../../components/PublicNav";
 
 const PublicHome = () => {
   const navigate = useNavigate();
@@ -44,6 +45,8 @@ const PublicHome = () => {
 
   return (
     <div style={styles.page}>
+      <PublicNav />
+
       {/* SPLIT HERO — DLWLevel Core */}
       <section style={styles.hero}>
         <div style={styles.heroLeft}>

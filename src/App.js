@@ -71,6 +71,9 @@ import EventSubmission from "./pages/public/submissions/EventSubmission";
 import MediaSubmission from "./pages/public/submissions/MediaSubmission";
 import PlayerSubmission from "./pages/public/submissions/PlayerSubmission";
 
+// ADMIN DASHBOARD
+import AdminDashboard from "./pages/admin/AdminDashboard";
+
 function App() {
   return (
     <Router>
@@ -148,10 +151,12 @@ function App() {
         <Route path="/public/submissions/media" element={<MediaSubmission />} />
         <Route path="/public/submissions/player" element={<PlayerSubmission />} />
 
+        {/* ADMIN DASHBOARD */}
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+
       </Routes>
     </Router>
   );
 }
 
 export default App;
-
