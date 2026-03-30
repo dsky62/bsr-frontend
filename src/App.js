@@ -76,7 +76,7 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 
 // ADMIN - RANKINGS MANAGEMENT
 import RankingsManager from "./pages/admin/RankingsManager";
-import Rankings from "./pages/admin/Rankings";
+import AdminRankings from "./pages/admin/Rankings";
 import AddRanking from "./pages/admin/AddRanking";
 import AddRankings from "./pages/admin/AddRankings";
 import EditRanking from "./pages/admin/EditRanking";
@@ -163,7 +163,7 @@ function App() {
 
         {/* ADMIN - RANKINGS MANAGEMENT */}
         <Route path="/admin/rankings" element={<RankingsManager />} />
-        <Route path="/admin/rankings/list" element={<Rankings />} />
+        <Route path="/admin/rankings/list" element={<AdminRankings />} />
         <Route path="/admin/rankings/add" element={<AddRanking />} />
         <Route path="/admin/rankings/add-bulk" element={<AddRankings />} />
         <Route path="/admin/rankings/edit/:id" element={<EditRanking />} />

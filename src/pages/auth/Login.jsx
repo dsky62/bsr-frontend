@@ -1,142 +1,103 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import { useAuth } from '../../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import PublicNav from '../../components/PublicNav';
 
 const Login = () => {
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const [userType, setUserType] = useState(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError('');
-    setLoading(true);
-
-    try {
-      await login(email, password);
-      navigate('/');
-    } catch (err) {
-      setError(err.message || 'Login failed');
-    } finally {
-      setLoading(false);
-    }
+  const styles = {
+    page: { minHeight: '100vh', background: 'radial-gradient(circle at top, #1F2933 0%, #050608 55%, #020203 100%)', color: '#FFFFFF', fontFamily: 'Arial, sans-serif', paddingBottom: '50px' },
+    container: { maxWidth: '500px', margin: '60px auto', padding: '40px 20px' },
+    header: { display: 'flex', alignItems: 'center', gap: '20px', marginBottom: '40px' },
+    backBtn: { background: 'rgba(0,180,255,0.2)', color: '#00B4FF', border: '1px solid #00B4FF', padding: '10px 20px', borderRadius: '8px', cursor: 'pointer', fontWeight: '700', fontSize: '14px', transition: '0.3s' },
+    title: { fontSize: '40px', fontWeight: '900', textShadow: '0 0 18px rgba(0, 180, 255, 0.9)', margin: 0 },
+    card: { background: 'rgba(0,0,0,0.7)', border: '2px solid #00B4FF', borderRadius: '14px', padding: '30px', marginBottom: '20px', boxShadow: '0 0 30px rgba(0,180,255,0.5)' },
+    cardTitle: { fontSize: '20px', fontWeight: '800', color: '#00B4FF', marginBottom: '20px', textAlign: 'center' },
+    typesGrid: { display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '10px', marginBottom: '20px' },
+    typeBtn: (active) => ({ background: active ? '#00B4FF' : 'rgba(0,180,255,0.2)', color: active ? '#000' : '#FFFFFF', border: '1px solid #00B4FF', padding: '12px', borderRadius: '8px', cursor: 'pointer', fontWeight: '700', fontSize: '13px', transition: '0.3s' }),
+    formGroup: { marginBottom: '20px' },
+    label: { display: 'block', fontSize: '13px', fontWeight: '700', color: '#00B4FF', marginBottom: '8px' },
+    input: { width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid rgba(0,180,255,0.3)', background: 'rgba(0,0,0,0.6)', color: '#FFFFFF', fontSize: '14px', boxSizing: 'border-box', fontFamily: 'inherit' },
+    submitBtn: { width: '100%', padding: '12px', background: '#00B4FF', color: '#000', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: '700', fontSize: '14px', marginTop: '15px', transition: '0.3s' },
+    signupLink: { textAlign: 'center', marginTop: '20px', fontSize: '13px' },
+    link: { color: '#00B4FF', cursor: 'pointer', textDecoration: 'underline' },
+    footer: { textAlign: 'center', padding: '40px', opacity: 0.7, fontSize: '14px' },
   };
 
-  return (
-    <div style={{ background: 'linear-gradient(135deg, #0a0e27 0%, #1a1a2e 50%, #16213e 100%)', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
-      
-      <div style={{ maxWidth: '400px', width: '100%' }}>
-        
-        {/* HEADER */}
-        <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-          <h1 style={{ fontSize: '36px', fontWeight: '900', color: '#00B4FF', marginBottom: '10px' }}>🏀 BSR Login</h1>
-          <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '14px' }}>Sign in to your account</p>
-        </div>
+  const handleLogin = () => {
+    if (!email || !password) {
+      alert('Please fill in all fields');
+      return;
+    }
+    setLoading(true);
+    setTimeout(() => {
+      alert(`Login successful as ${userType}!`);
+      setLoading(false);
+      navigate('/');
+    }, 1000);
+  };
 
-        {/* FORM */}
-        <form onSubmit={handleSubmit} style={{ background: 'rgba(0,180,255,0.1)', border: '2px solid rgba(0,180,255,0.3)', borderRadius: '12px', padding: '30px' }}>
-          
-          {/* ERROR MESSAGE */}
-          {error && (
-            <div style={{ background: 'rgba(255,0,0,0.2)', border: '1px solid #FF0000', color: '#FF6B6B', padding: '12px', borderRadius: '8px', marginBottom: '20px', fontSize: '13px' }}>
-              ❌ {error}
+  if (!userType) {
+    return (
+      <div style={styles.page}>
+        <PublicNav />
+        <div style={styles.container}>
+          <div style={styles.header}>
+            <button onClick={() => navigate('/')} style={styles.backBtn}>← Back to Home</button>
+            <h1 style={styles.title}>🔐 Login</h1>
+          </div>
+          <div style={styles.card}>
+            <h2 style={styles.cardTitle}>Select Account Type</h2>
+            <div style={styles.typesGrid}>
+              <button style={styles.typeBtn(false)} onClick={() => setUserType('coach')}>👨‍🏫 Coach</button>
+              <button style={styles.typeBtn(false)} onClick={() => setUserType('player')}>🏀 Player</button>
+              <button style={styles.typeBtn(false)} onClick={() => setUserType('scout')}>🔍 Scout</button>
             </div>
-          )}
-
-          {/* EMAIL */}
-          <div style={{ marginBottom: '20px' }}>
-            <label style={{ display: 'block', color: '#00B4FF', fontWeight: '700', marginBottom: '8px', fontSize: '14px' }}>Email Address</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="you@example.com"
-              required
-              style={{
-                width: '100%',
-                padding: '12px',
-                borderRadius: '8px',
-                border: '2px solid rgba(0,180,255,0.3)',
-                background: 'rgba(0,0,0,0.5)',
-                color: '#fff',
-                fontSize: '14px',
-                boxSizing: 'border-box',
-                transition: '0.3s'
-              }}
-              onFocus={(e) => e.target.style.borderColor = '#00B4FF'}
-              onBlur={(e) => e.target.style.borderColor = 'rgba(0,180,255,0.3)'}
-            />
           </div>
+        </div>
+        <footer style={styles.footer}>
+          <p>Built by DLW Solutions LLC • brooksports.com</p>
+        </footer>
+      </div>
+    );
+  }
 
-          {/* PASSWORD */}
-          <div style={{ marginBottom: '20px' }}>
-            <label style={{ display: 'block', color: '#00B4FF', fontWeight: '700', marginBottom: '8px', fontSize: '14px' }}>Password</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••"
-              required
-              style={{
-                width: '100%',
-                padding: '12px',
-                borderRadius: '8px',
-                border: '2px solid rgba(0,180,255,0.3)',
-                background: 'rgba(0,0,0,0.5)',
-                color: '#fff',
-                fontSize: '14px',
-                boxSizing: 'border-box',
-                transition: '0.3s'
-              }}
-              onFocus={(e) => e.target.style.borderColor = '#00B4FF'}
-              onBlur={(e) => e.target.style.borderColor = 'rgba(0,180,255,0.3)'}
-            />
+  return (
+    <div style={styles.page}>
+      <PublicNav />
+      <div style={styles.container}>
+        <div style={styles.header}>
+          <button onClick={() => navigate('/')} style={styles.backBtn}>← Back to Home</button>
+          <h1 style={styles.title}>🔐 Login</h1>
+        </div>
+        <div style={styles.card}>
+          <h2 style={styles.cardTitle}>{userType === 'coach' ? '👨‍🏫 Coach' : userType === 'player' ? '🏀 Player' : '🔍 Scout'} Login</h2>
+          <div style={styles.formGroup}>
+            <label style={styles.label}>Email Address</label>
+            <input type="email" placeholder="your@email.com" style={styles.input} value={email} onChange={(e) => setEmail(e.target.value)} />
           </div>
-
-          {/* FORGOT PASSWORD */}
-          <div style={{ textAlign: 'right', marginBottom: '20px' }}>
-            <Link to="/auth/reset-password" style={{ color: '#00B4FF', textDecoration: 'none', fontSize: '13px', fontWeight: '700' }}>Forgot Password?</Link>
+          <div style={styles.formGroup}>
+            <label style={styles.label}>Password</label>
+            <input type="password" placeholder="Enter password" style={styles.input} value={password} onChange={(e) => setPassword(e.target.value)} />
           </div>
-
-          {/* SUBMIT BUTTON */}
-          <button
-            type="submit"
-            disabled={loading}
-            style={{
-              width: '100%',
-              padding: '12px',
-              borderRadius: '8px',
-              background: loading ? 'rgba(0,180,255,0.5)' : 'linear-gradient(90deg, #00B4FF, #0088CC)',
-              color: '#000',
-              border: 'none',
-              fontWeight: '700',
-              fontSize: '16px',
-              cursor: loading ? 'not-allowed' : 'pointer',
-              transition: '0.3s',
-              marginBottom: '20px'
-            }}
-            onMouseEnter={(e) => !loading && (e.target.style.background = 'linear-gradient(90deg, #00D4FF, #00A8FF)')}
-            onMouseLeave={(e) => !loading && (e.target.style.background = 'linear-gradient(90deg, #00B4FF, #0088CC)')}
-          >
-            {loading ? 'Logging in...' : 'Login'}
+          <button style={styles.submitBtn} onClick={handleLogin} disabled={loading}>
+            {loading ? 'Signing In...' : 'Sign In'}
           </button>
-
-          {/* SIGN UP LINK */}
-          <div style={{ textAlign: 'center', color: 'rgba(255,255,255,0.7)', fontSize: '13px' }}>
-            Don't have an account? <Link to="/auth/signup" style={{ color: '#00B4FF', textDecoration: 'none', fontWeight: '700' }}>Sign Up</Link>
+          <div style={styles.signupLink}>
+            Don't have an account? <span style={styles.link} onClick={() => navigate('/signup')}>Sign Up Here</span>
           </div>
-        </form>
-
-        {/* DEMO CREDENTIALS */}
-        <div style={{ marginTop: '30px', background: 'rgba(0,180,255,0.1)', border: '1px solid rgba(0,180,255,0.3)', borderRadius: '8px', padding: '15px', fontSize: '12px', color: 'rgba(255,255,255,0.7)' }}>
-          <div style={{ fontWeight: '700', color: '#00B4FF', marginBottom: '8px' }}>Demo Credentials:</div>
-          <div>Email: <span style={{ color: '#fff' }}>coach@bsr.com</span></div>
-          <div>Password: <span style={{ color: '#fff' }}>password123</span></div>
+          <div style={{textAlign: 'center', marginTop: '15px'}}>
+            <span style={{...styles.link, cursor: 'pointer', fontSize: '12px'}} onClick={() => setUserType(null)}>← Select Different Account Type</span>
+          </div>
         </div>
       </div>
+      <footer style={styles.footer}>
+        <p>Built by DLW Solutions LLC • brooksports.com</p>
+      </footer>
     </div>
   );
 };

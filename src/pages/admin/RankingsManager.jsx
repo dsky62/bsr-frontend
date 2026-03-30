@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import AdminLayout from '../../components/AdminLayout';
 import './admin.css';
 
 const RankingsManager = () => {
@@ -137,242 +138,244 @@ const RankingsManager = () => {
 
   const classes = ['All', ...new Set(rankings.map(r => r.class).filter(Boolean))];
 
-  if (loading) return <div className="loading">Loading rankings...</div>;
+  if (loading) return <AdminLayout><div className="loading">Loading rankings...</div></AdminLayout>;
 
   return (
-    <div className="rankings-manager">
-      <h1>Rankings Manager</h1>
-      
-      {error && <div className="error-message">{error}</div>}
+    <AdminLayout>
+      <div className="rankings-manager">
+        <h1>Rankings Manager</h1>
+        
+        {error && <div className="error-message">{error}</div>}
 
-      <div className="manager-controls">
-        <button 
-          className="btn-primary"
-          onClick={() => setShowForm(!showForm)}
-        >
-          {showForm ? 'Cancel' : 'Add New Ranking'}
-        </button>
-
-        <div className="filter-controls">
-          <label htmlFor="classFilter">Filter by Class:</label>
-          <select 
-            id="classFilter"
-            value={filterClass}
-            onChange={(e) => setFilterClass(e.target.value)}
+        <div className="manager-controls">
+          <button 
+            className="btn-primary"
+            onClick={() => setShowForm(!showForm)}
           >
-            {classes.map(cls => (
-              <option key={cls} value={cls}>{cls}</option>
-            ))}
-          </select>
-        </div>
-      </div>
+            {showForm ? 'Cancel' : 'Add New Ranking'}
+          </button>
 
-      {showForm && (
-        <form className="ranking-form" onSubmit={handleSubmit}>
-          <div className="form-section">
-            <h2>{editingId ? 'Edit Ranking' : 'Add New Ranking'}</h2>
-            
-            <div className="form-grid">
-              <div className="form-group">
-                <label htmlFor="rank">Rank *</label>
-                <input
-                  type="number"
-                  id="rank"
-                  name="rank"
-                  value={formData.rank}
-                  onChange={handleInputChange}
-                  placeholder="e.g., 1, 2, 3"
-                  required
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="playerName">Player Name *</label>
-                <input
-                  type="text"
-                  id="playerName"
-                  name="playerName"
-                  value={formData.playerName}
-                  onChange={handleInputChange}
-                  placeholder="Full name"
-                  required
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="position">Position</label>
-                <input
-                  type="text"
-                  id="position"
-                  name="position"
-                  value={formData.position}
-                  onChange={handleInputChange}
-                  placeholder="e.g., PG, SG, SF"
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="height">Height</label>
-                <input
-                  type="text"
-                  id="height"
-                  name="height"
-                  value={formData.height}
-                  onChange={handleInputChange}
-                  placeholder="e.g., 6'2\""
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="weight">Weight</label>
-                <input
-                  type="text"
-                  id="weight"
-                  name="weight"
-                  value={formData.weight}
-                  onChange={handleInputChange}
-                  placeholder="e.g., 195 lbs"
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="school">School</label>
-                <input
-                  type="text"
-                  id="school"
-                  name="school"
-                  value={formData.school}
-                  onChange={handleInputChange}
-                  placeholder="High school name"
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="grade">Grade</label>
-                <input
-                  type="text"
-                  id="grade"
-                  name="grade"
-                  value={formData.grade}
-                  onChange={handleInputChange}
-                  placeholder="e.g., Senior, Junior"
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="class">Class *</label>
-                <input
-                  type="text"
-                  id="class"
-                  name="class"
-                  value={formData.class}
-                  onChange={handleInputChange}
-                  placeholder="e.g., 2025, 2026"
-                  required
-                />
-              </div>
-
-              <div className="form-group full-width">
-                <label htmlFor="stats">Stats</label>
-                <textarea
-                  id="stats"
-                  name="stats"
-                  value={formData.stats}
-                  onChange={handleInputChange}
-                  placeholder="Career stats, averages, highlights"
-                  rows="4"
-                />
-              </div>
-
-              <div className="form-group full-width">
-                <label htmlFor="notes">Notes</label>
-                <textarea
-                  id="notes"
-                  name="notes"
-                  value={formData.notes}
-                  onChange={handleInputChange}
-                  placeholder="Additional notes or comments"
-                  rows="4"
-                />
-              </div>
-            </div>
-
-            <div className="form-actions">
-              <button type="submit" className="btn-primary">
-                {editingId ? 'Update Ranking' : 'Add Ranking'}
-              </button>
-              <button 
-                type="button" 
-                className="btn-secondary"
-                onClick={handleCancel}
-              >
-                Cancel
-              </button>
-            </div>
+          <div className="filter-controls">
+            <label htmlFor="classFilter">Filter by Class:</label>
+            <select 
+              id="classFilter"
+              value={filterClass}
+              onChange={(e) => setFilterClass(e.target.value)}
+            >
+              {classes.map(cls => (
+                <option key={cls} value={cls}>{cls}</option>
+              ))}
+            </select>
           </div>
-        </form>
-      )}
+        </div>
 
-      <div className="rankings-table-container">
-        <table className="rankings-table">
-          <thead>
-            <tr>
-              <th>Rank</th>
-              <th>Player Name</th>
-              <th>Position</th>
-              <th>Height/Weight</th>
-              <th>School</th>
-              <th>Grade</th>
-              <th>Class</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {sortedRankings.length > 0 ? (
-              sortedRankings.map((ranking) => (
-                <tr key={ranking._id || ranking.id}>
-                  <td className="rank-cell">{ranking.rank}</td>
-                  <td className="player-name">{ranking.playerName}</td>
-                  <td>{ranking.position || '-'}</td>
-                  <td>
-                    {ranking.height || '-'} / {ranking.weight || '-'}
-                  </td>
-                  <td>{ranking.school || '-'}</td>
-                  <td>{ranking.grade || '-'}</td>
-                  <td>{ranking.class || '-'}</td>
-                  <td className="actions-cell">
-                    <button
-                      className="btn-edit"
-                      onClick={() => handleEdit(ranking)}
-                      title="Edit"
-                    >
-                      ✏️
-                    </button>
-                    <button
-                      className="btn-delete"
-                      onClick={() => handleDelete(ranking._id || ranking.id)}
-                      title="Delete"
-                    >
-                      🗑️
-                    </button>
+        {showForm && (
+          <form className="ranking-form" onSubmit={handleSubmit}>
+            <div className="form-section">
+              <h2>{editingId ? 'Edit Ranking' : 'Add New Ranking'}</h2>
+              
+              <div className="form-grid">
+                <div className="form-group">
+                  <label htmlFor="rank">Rank *</label>
+                  <input
+                    type="number"
+                    id="rank"
+                    name="rank"
+                    value={formData.rank}
+                    onChange={handleInputChange}
+                    placeholder="e.g., 1, 2, 3"
+                    required
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="playerName">Player Name *</label>
+                  <input
+                    type="text"
+                    id="playerName"
+                    name="playerName"
+                    value={formData.playerName}
+                    onChange={handleInputChange}
+                    placeholder="Full name"
+                    required
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="position">Position</label>
+                  <input
+                    type="text"
+                    id="position"
+                    name="position"
+                    value={formData.position}
+                    onChange={handleInputChange}
+                    placeholder="e.g., PG, SG, SF"
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="height">Height</label>
+                  <input
+                    type="text"
+                    id="height"
+                    name="height"
+                    value={formData.height}
+                    onChange={handleInputChange}
+                    placeholder="e.g., 6 feet 2 inches"
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="weight">Weight</label>
+                  <input
+                    type="text"
+                    id="weight"
+                    name="weight"
+                    value={formData.weight}
+                    onChange={handleInputChange}
+                    placeholder="e.g., 195 lbs"
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="school">School</label>
+                  <input
+                    type="text"
+                    id="school"
+                    name="school"
+                    value={formData.school}
+                    onChange={handleInputChange}
+                    placeholder="High school name"
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="grade">Grade</label>
+                  <input
+                    type="text"
+                    id="grade"
+                    name="grade"
+                    value={formData.grade}
+                    onChange={handleInputChange}
+                    placeholder="e.g., Senior, Junior"
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="class">Class *</label>
+                  <input
+                    type="text"
+                    id="class"
+                    name="class"
+                    value={formData.class}
+                    onChange={handleInputChange}
+                    placeholder="e.g., 2025, 2026"
+                    required
+                  />
+                </div>
+
+                <div className="form-group full-width">
+                  <label htmlFor="stats">Stats</label>
+                  <textarea
+                    id="stats"
+                    name="stats"
+                    value={formData.stats}
+                    onChange={handleInputChange}
+                    placeholder="Career stats, averages, highlights"
+                    rows="4"
+                  />
+                </div>
+
+                <div className="form-group full-width">
+                  <label htmlFor="notes">Notes</label>
+                  <textarea
+                    id="notes"
+                    name="notes"
+                    value={formData.notes}
+                    onChange={handleInputChange}
+                    placeholder="Additional notes or comments"
+                    rows="4"
+                  />
+                </div>
+              </div>
+
+              <div className="form-actions">
+                <button type="submit" className="btn-primary">
+                  {editingId ? 'Update Ranking' : 'Add Ranking'}
+                </button>
+                <button 
+                  type="button" 
+                  className="btn-secondary"
+                  onClick={handleCancel}
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </form>
+        )}
+
+        <div className="rankings-table-container">
+          <table className="rankings-table">
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Player Name</th>
+                <th>Position</th>
+                <th>Height/Weight</th>
+                <th>School</th>
+                <th>Grade</th>
+                <th>Class</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {sortedRankings.length > 0 ? (
+                sortedRankings.map((ranking) => (
+                  <tr key={ranking._id || ranking.id}>
+                    <td className="rank-cell">{ranking.rank}</td>
+                    <td className="player-name">{ranking.playerName}</td>
+                    <td>{ranking.position || '-'}</td>
+                    <td>
+                      {ranking.height || '-'} / {ranking.weight || '-'}
+                    </td>
+                    <td>{ranking.school || '-'}</td>
+                    <td>{ranking.grade || '-'}</td>
+                    <td>{ranking.class || '-'}</td>
+                    <td className="actions-cell">
+                      <button
+                        className="btn-edit"
+                        onClick={() => handleEdit(ranking)}
+                        title="Edit"
+                      >
+                        ✏️
+                      </button>
+                      <button
+                        className="btn-delete"
+                        onClick={() => handleDelete(ranking._id || ranking.id)}
+                        title="Delete"
+                      >
+                        🗑️
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="8" className="empty-message">
+                    No rankings found
                   </td>
                 </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="8" className="empty-message">
-                  No rankings found
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
+              )}
+            </tbody>
+          </table>
+        </div>
 
-      <div className="rankings-summary">
-        <p>Total Rankings: {sortedRankings.length}</p>
+        <div className="rankings-summary">
+          <p>Total Rankings: {sortedRankings.length}</p>
+        </div>
       </div>
-    </div>
+    </AdminLayout>
   );
 };
 
