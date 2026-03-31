@@ -77,6 +77,10 @@
   padding: 30px 32px 40px;
 }
 
+.admin-section {
+  margin-bottom: 40px;
+}
+
 .admin-section-title {
   font-size: 18px;
   font-weight: 800;
@@ -108,6 +112,11 @@
   border-color: #00b4ff;
 }
 
+.admin-card-accent {
+  border-color: #00B4FF;
+  box-shadow: 0 0 30px rgba(0, 180, 255, 0.5);
+}
+
 .admin-card-title {
   font-size: 16px;
   font-weight: 800;
@@ -118,6 +127,107 @@
 .admin-card-text {
   font-size: 13px;
   opacity: 0.9;
+}
+
+/* LAYER 2 NAVIGATION */
+
+.admin-card-layer2 {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(0, 180, 255, 0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  animation: slideDown 0.2s ease-out;
+}
+
+.admin-layer2-item {
+  padding: 8px 0;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: 0.2s;
+  position: relative;
+}
+
+.admin-layer2-item:hover {
+  background: rgba(0, 180, 255, 0.05);
+  padding-left: 8px;
+}
+
+.admin-layer2-label {
+  font-size: 13px;
+  color: #00B4FF;
+  text-decoration: none;
+  display: block;
+  font-weight: 600;
+}
+
+.admin-layer2-link {
+  font-size: 13px;
+  color: #00B4FF;
+  text-decoration: none;
+  padding: 8px 0;
+  border-radius: 6px;
+  transition: 0.2s;
+  display: block;
+}
+
+.admin-layer2-link:hover {
+  background: rgba(0, 180, 255, 0.1);
+  padding-left: 8px;
+}
+
+/* LAYER 3 NAVIGATION */
+
+.admin-card-layer3 {
+  margin-top: 8px;
+  padding-left: 16px;
+  border-left: 2px solid rgba(0, 180, 255, 0.4);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  animation: slideRight 0.2s ease-out;
+}
+
+.admin-layer3-link {
+  font-size: 12px;
+  color: #00B4FF;
+  text-decoration: none;
+  padding: 6px 0;
+  border-radius: 4px;
+  transition: 0.2s;
+  display: block;
+  opacity: 0.85;
+}
+
+.admin-layer3-link:hover {
+  background: rgba(0, 180, 255, 0.15);
+  padding-left: 6px;
+  opacity: 1;
+}
+
+/* ANIMATIONS */
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideRight {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 /* FOOTER */
@@ -135,11 +245,9 @@
 }
 
 /* ===========================
-   YOUR ORIGINAL ADMIN FORM/TABLE STYLES
-   (KEPT EXACTLY AS YOU HAD THEM)
+   ADMIN FORM & TABLE STYLES
 =========================== */
 
-/* Admin Container */
 .admin-container {
   max-width: 900px;
   margin: 40px auto;
@@ -150,7 +258,6 @@
   font-family: Arial, sans-serif;
 }
 
-/* Page Title */
 .admin-container h1 {
   font-size: 28px;
   margin-bottom: 25px;
@@ -158,14 +265,12 @@
   color: #222;
 }
 
-/* Form Layout */
 .admin-form {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
-/* Labels */
 .admin-form label {
   font-size: 15px;
   font-weight: 600;
@@ -173,7 +278,6 @@
   margin-bottom: 5px;
 }
 
-/* Inputs + Textareas */
 .admin-form input,
 .admin-form textarea,
 .admin-form select {
@@ -187,13 +291,11 @@
   box-sizing: border-box;
 }
 
-/* Textarea height */
 .admin-form textarea {
   min-height: 120px;
   resize: vertical;
 }
 
-/* Save Button */
 .admin-save-btn {
   background: #007bff;
   color: white;
@@ -210,7 +312,6 @@
   background: #0056b3;
 }
 
-/* Admin Table */
 .admin-table {
   width: 100%;
   border-collapse: collapse;
@@ -234,7 +335,6 @@
   background: #fafafa;
 }
 
-/* Edit Links */
 .admin-table a {
   color: #007bff;
   text-decoration: none;
@@ -244,4 +344,3 @@
 .admin-table a:hover {
   text-decoration: underline;
 }
-

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import PublicNav from "../../../components/PublicNav";
-import BackButton from "../../../components/BackButton";
 
 const PublicHome = () => {
   const navigate = useNavigate();
@@ -206,7 +205,6 @@ const PublicHome = () => {
   return (
     <div style={styles.page}>
       <PublicNav />
-      <BackButton />
       {renderModal()}
 
       <section style={styles.hero}>
@@ -239,14 +237,6 @@ const PublicHome = () => {
               <div style={styles.heroVideoPlayTriangle} />
             </div>
           </div>
-        </div>
-
-        <div style={styles.heroPoster}>
-          <img 
-            src="/images/IMG_7961.PNG" 
-            alt="Brooks Scouting Report 2026" 
-            style={styles.posterImage}
-          />
         </div>
       </section>
 
@@ -599,7 +589,7 @@ const modalStyles = {
 
 const styles = {
   page: { minHeight: "100vh", background: "radial-gradient(circle at top, #1F2933 0%, #050608 55%, #020203 100%)", color: "#FFFFFF", fontFamily: "Arial, sans-serif", paddingBottom: "50px" },
-  hero: { maxWidth: "1400px", margin: "0 auto", padding: "40px 20px 30px 20px", display: "flex", flexWrap: "wrap", gap: "24px", alignItems: "stretch" },
+  hero: { maxWidth: "1300px", margin: "0 auto", padding: "40px 20px 30px 20px", display: "flex", flexWrap: "wrap", gap: "24px", alignItems: "stretch" },
   heroLeft: { flex: "1 1 380px" },
   heroTitle: { fontSize: "46px", fontWeight: "900", letterSpacing: "0.08em", textTransform: "uppercase", textShadow: "0 0 18px rgba(0, 180, 255, 0.9)" },
   heroSubtitle: { marginTop: "12px", fontSize: "18px", opacity: 0.9 },
@@ -614,8 +604,6 @@ const styles = {
   heroVideoPlay: { position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", zIndex: 2 },
   heroVideoPlayCircle: { width: "70px", height: "70px", borderRadius: "50%", border: "3px solid #FFFFFF", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 0 18px rgba(0, 180, 255, 0.9)", background: "rgba(0,0,0,0.5)" },
   heroVideoPlayTriangle: { width: 0, height: 0, borderTop: "10px solid transparent", borderBottom: "10px solid transparent", borderLeft: "16px solid #FFFFFF", marginLeft: "4px" },
-  heroPoster: { flex: "0 0 240px", borderRadius: "18px", border: "3px solid #00B4FF", overflow: "hidden", boxShadow: "0 0 30px rgba(0, 180, 255, 0.7)" },
-  posterImage: { width: "100%", height: "100%", objectFit: "cover", display: "block" },
   reelSection: { maxWidth: "1300px", margin: "0 auto 40px auto", padding: "0 20px" },
   reelTitle: { fontSize: "22px", fontWeight: "800", marginBottom: "14px", textTransform: "uppercase", letterSpacing: "0.12em" },
   reelRow: { display: "flex", gap: "18px", overflowX: "auto", paddingBottom: "6px" },

@@ -9,6 +9,7 @@ import PlayersIndex from "./pages/public/players/PlayersIndex";
 import PlayersList from "./pages/public/players/PlayersList";
 import PublicPlayerProfile from "./pages/public/players/PublicPlayerProfile";
 import PublicPlayer_JalenBrooks from "./pages/public/players/PublicPlayer_JalenBrooks";
+import PublicPlayerDetail from "./pages/public/players/PublicPlayerDetail";
 
 // TEAMS
 import Teams from "./pages/public/teams/Teams";
@@ -71,15 +72,36 @@ import EventSubmission from "./pages/public/submissions/EventSubmission";
 import MediaSubmission from "./pages/public/submissions/MediaSubmission";
 import PlayerSubmission from "./pages/public/submissions/PlayerSubmission";
 
-// ADMIN DASHBOARD
-import AdminDashboard from "./pages/admin/AdminDashboard";
+// AUTH PAGES
+import Login from "./pages/auth/Login";
+import SignUp from "./pages/auth/signup/SignUp";
 
-// ADMIN - RANKINGS MANAGEMENT
+// ADMIN PAGES
+import Admin from "./pages/admin/Admin";
+import AdminPlayers from "./pages/admin/Players";
+import AdminTeams from "./pages/admin/Teams";
+import AdminEvents from "./pages/admin/Events";
+import Camps from "./pages/admin/Camps";
 import RankingsManager from "./pages/admin/RankingsManager";
-import AdminRankings from "./pages/admin/Rankings";
-import AddRanking from "./pages/admin/AddRanking";
-import AddRankings from "./pages/admin/AddRankings";
+import AdminMedia from "./pages/admin/Media";
+import AdminNews from "./pages/admin/News";
+import Testimonials from "./pages/admin/Testimonials";
+import Coaches from "./pages/admin/Coaches";
+import Staff from "./pages/admin/Staff";
+import AdminFAQ from "./pages/admin/FAQ";
+import Partners from "./pages/admin/Partners";
+import EditPlayer from "./pages/admin/EditPlayer";
+import EditTeam from "./pages/admin/EditTeam";
+import EditEvent from "./pages/admin/EditEvent";
+import EditCamp from "./pages/admin/EditCamp";
 import EditRanking from "./pages/admin/EditRanking";
+import EditMedia from "./pages/admin/EditMedia";
+import AddPlayer from "./pages/admin/AddPlayer";
+import AddTeam from "./pages/admin/AddTeam";
+import AddEvent from "./pages/admin/AddEvent";
+import AddCamp from "./pages/admin/AddCamp";
+import AddRankings from "./pages/admin/AddRankings";
+import AddMedia from "./pages/admin/AddMedia";
 
 function App() {
   return (
@@ -93,6 +115,7 @@ function App() {
         <Route path="/public/players" element={<PlayersIndex />} />
         <Route path="/public/players/list" element={<PlayersList />} />
         <Route path="/public/players/profile" element={<PublicPlayerProfile />} />
+        <Route path="/public/players/detail/:id" element={<PublicPlayerDetail />} />
         <Route path="/public/players/jalen-brooks" element={<PublicPlayer_JalenBrooks />} />
 
         {/* TEAMS */}
@@ -158,15 +181,60 @@ function App() {
         <Route path="/public/submissions/media" element={<MediaSubmission />} />
         <Route path="/public/submissions/player" element={<PlayerSubmission />} />
 
-        {/* ADMIN DASHBOARD */}
-        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        {/* AUTH PAGES */}
+        <Route path="/auth/login" element={<Login />} />
+        <Route path="/auth/signup" element={<SignUp />} />
 
-        {/* ADMIN - RANKINGS MANAGEMENT */}
+        {/* ADMIN - MAIN HUB */}
+        <Route path="/admin" element={<Admin />} />
+
+        {/* ADMIN - PLAYERS */}
+        <Route path="/admin/players" element={<AdminPlayers />} />
+        <Route path="/admin/players/add" element={<AddPlayer />} />
+        <Route path="/admin/players/edit/:id" element={<EditPlayer />} />
+
+        {/* ADMIN - TEAMS */}
+        <Route path="/admin/teams" element={<AdminTeams />} />
+        <Route path="/admin/teams/add" element={<AddTeam />} />
+        <Route path="/admin/teams/edit/:id" element={<EditTeam />} />
+
+        {/* ADMIN - EVENTS */}
+        <Route path="/admin/events" element={<AdminEvents />} />
+        <Route path="/admin/events/add" element={<AddEvent />} />
+        <Route path="/admin/events/edit/:id" element={<EditEvent />} />
+
+        {/* ADMIN - CAMPS */}
+        <Route path="/admin/camps" element={<Camps />} />
+        <Route path="/admin/camps/add" element={<AddCamp />} />
+        <Route path="/admin/camps/edit/:id" element={<EditCamp />} />
+
+        {/* ADMIN - RANKINGS */}
         <Route path="/admin/rankings" element={<RankingsManager />} />
-        <Route path="/admin/rankings/list" element={<AdminRankings />} />
-        <Route path="/admin/rankings/add" element={<AddRanking />} />
-        <Route path="/admin/rankings/add-bulk" element={<AddRankings />} />
+        <Route path="/admin/rankings/add" element={<AddRankings />} />
         <Route path="/admin/rankings/edit/:id" element={<EditRanking />} />
+
+        {/* ADMIN - MEDIA */}
+        <Route path="/admin/media" element={<AdminMedia />} />
+        <Route path="/admin/media/add" element={<AddMedia />} />
+        <Route path="/admin/media/edit/:id" element={<EditMedia />} />
+
+        {/* ADMIN - NEWS */}
+        <Route path="/admin/news" element={<AdminNews />} />
+
+        {/* ADMIN - TESTIMONIALS */}
+        <Route path="/admin/testimonials" element={<Testimonials />} />
+
+        {/* ADMIN - COACHES */}
+        <Route path="/admin/coaches" element={<Coaches />} />
+
+        {/* ADMIN - STAFF */}
+        <Route path="/admin/staff" element={<Staff />} />
+
+        {/* ADMIN - FAQ */}
+        <Route path="/admin/faq" element={<AdminFAQ />} />
+
+        {/* ADMIN - PARTNERS */}
+        <Route path="/admin/partners" element={<Partners />} />
 
       </Routes>
     </Router>
